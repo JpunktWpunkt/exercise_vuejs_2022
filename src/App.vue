@@ -6,7 +6,7 @@
 </template>
 
 
-<script lang="ts">
+<script>
 import { Options, Vue } from 'vue-class-component';
 import Header from './components/Header.vue';
 import Tasks from './components/Tasks.vue';
