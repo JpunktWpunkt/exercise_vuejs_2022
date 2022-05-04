@@ -30,7 +30,11 @@ import Tasks from './components/Tasks.vue';
       }
     },
     toggleReminder(id) {
-console.log(id)
+     /* for each task (task)we do a conditional if the task.id is equal(===) to the id that's passed in*/
+/*if it is (?) we want to return is an array of objects where we have the initial task {...task}properties so we can spread across the initial*/
+/* and then we wanna change the reminder whatever the opposite of the current task (!task.reminder)*/
+      /*else if doesn't match the id we don't want to do anything, so we return the initial task*/
+      this.tasks = this.tasks.map((task)=> task.id === id ? {...task, reminder: !task.reminder}: task)
     },
   },
   created() {
