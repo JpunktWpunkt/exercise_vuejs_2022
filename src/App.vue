@@ -1,6 +1,7 @@
 <template>
   <div class="container">
   <Header title="Task Tracker"/>
+    <AddTask />
 <!--    Set that to a methods that woukd be defined under methods at the same file-->
     <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
   </div>
@@ -11,11 +12,13 @@
 import { Options, Vue } from 'vue-class-component';
 import Header from './components/Header.vue';
 import Tasks from './components/Tasks.vue';
+import AddTask from './components/AddTask';
 
 @Options({
   components: {
     Header,
     Tasks,
+    AddTask,
   },
   data() {
     return {
