@@ -1,7 +1,8 @@
 <template>
   <div class="container">
   <Header title="Task Tracker"/>
-    <Tasks :tasks="tasks"/>
+<!--    Set that to a methods that woukd be defined under methods at the same file-->
+    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
   </div>
 </template>
 
@@ -20,6 +21,17 @@ import Tasks from './components/Tasks.vue';
     return {
       tasks: []
     }
+  },
+ /* from each task we wanna filter, each task we want to take the id where  is not equal to the id thats passed*/
+  methods: {
+    deleteTask(id) {
+      if(confirm("Are you sure you want to delete?")) {
+    this.tasks = this.tasks.filter((task)=> task.id !== id)
+      }
+    },
+    toggleReminder(id) {
+console.log(id)
+    },
   },
   created() {
     this.tasks = [
