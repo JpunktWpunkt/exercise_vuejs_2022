@@ -1,20 +1,17 @@
-<template>
-<form class="add-form">
+<template><!-- with v-model exists a binding between v-model and data-->
+<form @submit="onSubmit" class="add-form">
 <div class="form-control">
   <label>Task</label>
-  <input type ="text" name="text" placeholder="Add Task" />
+  <input type ="text" v-model="text" name="text" placeholder="Add Task" />
 </div>
   <div class="form-control">
     <label>Day & Time</label>
-    <input
-    type="text"
-    name="day"
-    placeholder="Add Day & Time"
+    <input type="text" v-model="day" name="day" placeholder="Add Day & Time"
     />
   </div>
   <div class="form-control form-control-check">
     <label>Set Reminder</label>
-    <input type="checkbox" name="reminder" />
+    <input type="checkbox" v-model="reminder" name="reminder" />
   </div>
   <input type="submit" value="Save Task"
          class="btn btn-block"/>
@@ -24,7 +21,35 @@
 
 <script>
 export default {
-  name: 'AddTask'
+  name: 'AddTask',
+  data() {
+    return {
+      text: '',/*it's possbile to set here an default value, mit v-model verbunden*/
+      day:'',
+      reminder: '',
+    }
+  },
+ /* this method will be create an alert if !text */
+  methods: {
+    onSubmit(event) {
+      event.preventDefault()
+       if(!this.text) {
+alert('Please add a task')
+         return
+       }
+const newTask = {
+        id:Math.floor(Math.random() *100000),/*because we don`t use any Backend, wir randomize an id*/
+        text: this.text,
+        day: this.day,
+        reminder: this.reminder,
+       }
+       console.log(newTask)
+this.text = ''
+this.day = ''
+this.reminder = 'false'
+
+    }
+  }
 }
 </script>
 
