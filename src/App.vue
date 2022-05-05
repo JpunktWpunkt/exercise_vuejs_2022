@@ -1,7 +1,9 @@
 <template>
   <div class="container">
-  <Header title="Task Tracker"/>
-    <AddTask />
+  <Header @toggle-add-task="toggleAddTask" title="Task Tracker"/>
+    <div v-show="showAddTask"><!--addNewTask aus-/oder einblenden-->
+    <AddTask @add-task="addTask" />
+    </div>
 <!--    Set that to a methods that woukd be defined under methods at the same file-->
     <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
   </div>
@@ -22,11 +24,18 @@ import AddTask from './components/AddTask';
   },
   data() {
     return {
-      tasks: []
+      tasks: [],
+      showAddTask: false /*showAddTask false= aus*/
     }
   },
  /* from each task we wanna filter, each task we want to take the id where  is not equal to the id thats passed*/
   methods: {
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask
+    },
+    addTask(task){
+      this.tasks= [...this.tasks, task]
+    },
     deleteTask(id) {
       if(confirm("Are you sure you want to delete?")) {
     this.tasks = this.tasks.filter((task)=> task.id !== id)
